@@ -1,0 +1,10 @@
+$booking-web-typography: mat-typography-config(
+  $font-family: $primary-font-family,
+  $display-1: mat-typography-level(48px, 1, 300),
+  $headline: mat-typography-level(32px, 1.2, 600),
+  $title: mat-typography-level(24px, 1.64, 600),
+  $subheading-1: mat-typography-level(20px, 1.64, 300),
+  $body-2: mat-typography-level(18px, 1.5, 600),
+  $body-1: mat-typography-level(16px, 1.5, 600)
+);
+@include angular-material-typography($booking-web-typography);

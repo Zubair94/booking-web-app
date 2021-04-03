@@ -1,0 +1,80 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*",
+    "e2e/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/ng-cli-compat",
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "space-unary-ops": "error",
+        "object-curly-spacing": ["error", "always"],
+        "array-bracket-spacing": ["error", "never"],
+        "space-before-function-paren": ["error", "never"],
+        "keyword-spacing": ["error", { "after": true, "before": true }],
+        "spaced-comment": ["error", "always", { "exceptions": ["-+*"] }],
+        "func-call-spacing": ["error", "never"],
+        "space-before-blocks": "error",
+        "space-in-parens": ["error", "never"],
+        "space-infix-ops": ["error", { "int32Hint": false }],
+        "no-whitespace-before-property": "error",
+        "no-trailing-spaces": "error",
+        "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+        "block-spacing": "error",
+        "comma-dangle": ["error", "never"],
+        "comma-spacing": ["error", { "before": false, "after": true }],
+        "computed-property-spacing": ["error", "never"],
+        "key-spacing": ["error", { "mode": "strict" }],
+        "switch-colon-spacing": ["error", {"after": true, "before": false}],
+        "template-tag-spacing": ["error", "always"],
+        "arrow-spacing": "error",
+        "rest-spread-spacing": ["error", "never"],
+        "eol-last": ["error", "always"],
+        "template-curly-spacing": ["error", "always"],
+        "camelcase": "off",
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": ["element", "attribute"],
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": ["error"]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}

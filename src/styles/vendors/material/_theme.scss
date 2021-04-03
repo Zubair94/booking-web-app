@@ -1,0 +1,13 @@
+@import "~@angular/material/theming";
+@include mat-core();
+$booking-web-primary: mat-palette($mat-booking-web-primary);
+$booking-web-accent: mat-palette($mat-booking-web-accent);
+$booking-web-theme: mat-light-theme(
+  (
+    color: (
+      primary: $booking-web-primary,
+      accent: $booking-web-accent,
+    ),
+  )
+);
+@include angular-material-theme($booking-web-theme);
