@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { BookingRoutingModule } from './booking-routing.module';
-import { BookingComponent } from './booking.component';
+import { BookingContainerComponent } from './booking-container.component';
 import { SharedModule } from '@shared/shared.module';
 import { GuestSelectFormComponent } from './components/guest-select-form/guest-select-form.component';
 import { BookingFormComponent } from './components/booking-form/booking-form.component';
@@ -10,7 +10,7 @@ import { GuestAddFormComponent } from './components/guest-add-form/guest-add-for
 
 @NgModule({
   declarations: [
-    BookingComponent,
+    BookingContainerComponent,
     GuestSelectFormComponent,
     BookingFormComponent,
     GuestAddFormComponent

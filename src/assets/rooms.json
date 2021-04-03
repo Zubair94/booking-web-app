@@ -1,0 +1,47 @@
+[
+  {
+    "levelId": 1,
+    "level": "Level-01",
+    "rooms": [
+      {
+        "level": "Level-01",
+        "roomNo": "Room-11",
+        "occupied": false
+      },
+      {
+        "level": "Level-01",
+        "roomNo": "Room-12",
+        "occupied": false
+      },
+      {
+        "level": "Level-01",
+        "roomNo": "Room-13",
+        "occupied": false
+      }
+    ]
+  },
+  {
+    "levelId": 2,
+    "level": "Level-02",
+    "rooms": [
+      {
+        "levelId": 2,
+        "level": "Level-02",
+        "roomNo": "Room-21",
+        "occupied": false
+      },
+      {
+        "levelId": 2,
+        "level": "Level-02",
+        "roomNo": "Room-22",
+        "occupied": false
+      },
+      {
+        "levelId": 2,
+        "level": "Level-02",
+        "roomNo": "Room-23",
+        "occupied": false
+      }
+    ]
+  }
+]

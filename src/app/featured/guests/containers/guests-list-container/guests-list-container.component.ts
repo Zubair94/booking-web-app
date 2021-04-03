@@ -1,26 +1,15 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' }
-];
+import { GuestHistory } from '@typings/guest-history';
+import { GuestFacadeService } from '@core/services/guest/guest-facade.service';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { State } from '@store/core.reducer';
+import { selectAllGuestHistoryFiltered } from '@store/guest-history/guest-history.selectors';
+import { GuestHistoryFacadeService } from '@core/services/guest-history/guest-history-facade.service';
+import { DialogService } from '@app/core/services/dialog.service';
+import { GuestCheckoutDialogComponent } from '@featured/guests/containers/guest-checkout-dialog/guest-checkout-dialog.component';
 
 @Component({
   selector: 'app-guests-list-container',
@@ -29,15 +18,37 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class GuestsListContainerComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  constructor() { }
+  displayedColumns: string[] = ['name', 'checkInDate', 'rooms', 'action'];
+  dataSource: MatTableDataSource<GuestHistory>;
+  guestHistoryList$: Observable<GuestHistory[]>;
+  constructor(private guestFacadeService: GuestFacadeService, private store: Store<State>,
+              private guestHistoryFacadeService: GuestHistoryFacadeService, private dialogService: DialogService) { }
 
   ngOnInit(): void {
+    this.guestFacadeService.fetchGuestList();
+    this.guestHistoryFacadeService.fetchGuestHistoryList();
+    this.guestHistoryList$ = this.store.select(selectAllGuestHistoryFiltered);
+    this.guestHistoryList$.subscribe(list => {
+      this.dataSource = new MatTableDataSource<GuestHistory>(list);
+    });
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  handleGuestCheckOut(history: GuestHistory): void {
+    this.dialogService.openDialog(GuestCheckoutDialogComponent, {
+      disableClose: true,
+      autoFocus: false,
+      minWidth: '30vw',
+      maxHeight: '25vh',
+      hasBackdrop: true,
+      closeOnNavigation: true,
+      data: {
+        history
+      }
+    });
   }
 
 }

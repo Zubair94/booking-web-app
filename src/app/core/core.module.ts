@@ -12,6 +12,8 @@ import { CORE_REDUCERS, metaReducers } from '@store/core.reducer';
 import { CustomSerializer } from '@store/router/custom-serializer';
 import { AppErrorHandler } from '@core/app-error.handler';
 import { ErrorInterceptor } from '@core/interceptors/error.interceptor';
+import { GuestEffects } from '@store/guest/guest.effects';
+import { GuestHistoryEffects } from '@store/guest-history/guest-history.effects';
 
 
 
@@ -29,7 +31,7 @@ import { ErrorInterceptor } from '@core/interceptors/error.interceptor';
       navigationActionTiming: NavigationActionTiming.PreActivation,
       routerState: RouterState.Full
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([GuestEffects, GuestHistoryEffects]),
     SharedModule,
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: true }) : []
   ]

@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -10,7 +11,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookingFormComponent implements OnInit, OnDestroy {
-
+  @Input() roomsList$: Observable<any[]>;
   @Output() bookingFormData = new EventEmitter<any>();
   bookingForm: FormGroup;
   private onDestroy = new Subject<any>();

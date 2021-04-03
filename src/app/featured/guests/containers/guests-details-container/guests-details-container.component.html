@@ -7,6 +7,11 @@
     <h1 class="mat-h3">Guest Details</h1>
   </div>
   <div class="container-guest-detail-content">
-    <mat-card>Simple card</mat-card>
+    <mat-card *ngIf="(guest$ | async) as guest">
+      <h1 class="mat-h3">Guest Name: {{guest.name || ''}}</h1>
+      <h1 class="mat-h3">Guest Email: {{guest.email || ''}}</h1>
+      <h1 class="mat-h3">Guest Phone: {{guest.phone || ''}}</h1>
+      <h1 class="mat-h3">Guest Address: {{guest.address || ''}}</h1>
+    </mat-card>
   </div>
 </div>

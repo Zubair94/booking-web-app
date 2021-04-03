@@ -1,5 +1,16 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Guest } from '@typings/guest';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -9,13 +20,14 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
   styleUrls: ['./guest-add-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GuestAddFormComponent implements OnInit, OnDestroy {
-
-  @Output() bookingFormData = new EventEmitter<any>();
-  bookingForm: FormGroup;
+export class GuestAddFormComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() selectedGuest: Guest;
+  @Output() guestFormData = new EventEmitter<any>();
+  guestForm: FormGroup;
   private onDestroy = new Subject<any>();
   constructor(private formBuilder: FormBuilder) {
-    this.bookingForm = this.formBuilder.group({
+    this.guestForm = this.formBuilder.group({
+      id: [],
       name: [null, Validators.compose([
         Validators.required, Validators.minLength(2), Validators.maxLength(50)
       ])],
@@ -28,18 +40,27 @@ export class GuestAddFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.bookingForm.valueChanges
+    this.guestForm.valueChanges
       .pipe(
         debounceTime(500),
         takeUntil(this.onDestroy)
       )
       .subscribe(value => {
-        if (this.bookingForm.valid) {
-          this.bookingFormData.emit(value);
+        if (this.guestForm.valid) {
+          this.guestFormData.emit(value);
         } else {
-          this.bookingFormData.emit(null);
+          this.guestFormData.emit(null);
         }
       });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.selectedGuest && changes.selectedGuest.currentValue) {
+      this.guestForm.patchValue({
+        ...this.selectedGuest,
+        address: null
+      });
+    }
   }
 
   ngOnDestroy(): void {
@@ -48,15 +69,15 @@ export class GuestAddFormComponent implements OnInit, OnDestroy {
   }
 
   get name(): FormControl {
-    return this.bookingForm.get('name') as FormControl;
+    return this.guestForm.get('name') as FormControl;
   }
   get email(): FormControl {
-    return this.bookingForm.get('email') as FormControl;
+    return this.guestForm.get('email') as FormControl;
   }
   get phone(): FormControl {
-    return this.bookingForm.get('phone') as FormControl;
+    return this.guestForm.get('phone') as FormControl;
   }
   get address(): FormControl {
-    return this.bookingForm.get('address') as FormControl;
+    return this.guestForm.get('address') as FormControl;
   }
 }

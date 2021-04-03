@@ -1,0 +1,15 @@
+<div>
+  <h1 class="title mat-h2">Check Out</h1>
+  <div class="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a Check In Date</mat-label>
+      <input matInput [matDatepicker]="picker" [formControl]="checkOutDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="booking-form-buttons">
+    <button type="button" mat-raised-button color="warn" (click)="close()">Cancel</button>
+    <button type="button" mat-raised-button color="primary" (click)="checkOut()">Save</button>
+  </div>
+</div>

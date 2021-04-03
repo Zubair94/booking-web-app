@@ -13,24 +13,24 @@
           <div>
             <h1 class="mat-h2">Add Guest</h1>
             <div class="guest-section">
-              <mat-radio-group>
+              <mat-radio-group [formControl]="addGuestMethod">
                 <mat-radio-button disableRipple value="manual">Add Manually</mat-radio-button>
                 <mat-radio-button disableRipple value="auto">Add From Existing Guests</mat-radio-button>
               </mat-radio-group>
-              <app-guest-select-form></app-guest-select-form>
-              <app-guest-add-form></app-guest-add-form>
+              <app-guest-select-form *ngIf="addGuestMethod.value === 'auto'" [guestList$]="guestList$" (selectedGuest)="setSelectedGuest($event)"></app-guest-select-form>
+              <app-guest-add-form [selectedGuest]="selectedGuest" (guestFormData)="setGuestFormData($event)"></app-guest-add-form>
             </div>
           </div>
           <div>
             <h1 class="mat-h2">Booking Info</h1>
             <div class="guest-section">
-              <app-booking-form></app-booking-form>
+              <app-booking-form [roomsList$]="roomsList$" (bookingFormData)="setBookingFormData($event)"></app-booking-form>
             </div>
           </div>
         </div>
         <div class="booking-form-buttons">
           <button type="button" mat-raised-button color="warn" [routerLink]="['/guests']">Cancel</button>
-          <button type="button" mat-raised-button color="primary">Save</button>
+          <button type="button" mat-raised-button color="primary" [disabled]="disableSubmit" (click)="submitBookingForm()">Save</button>
         </div>
       </mat-card-content>
     </mat-card>

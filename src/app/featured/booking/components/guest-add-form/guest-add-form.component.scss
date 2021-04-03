@@ -1,6 +1,7 @@
 form {
   display: flex;
   flex-direction: column;
+  padding-top: 24px;
   & > * {
     padding-bottom: 12px;
   }

@@ -8,10 +8,18 @@
   <mat-form-field appearance="fill">
     <mat-label>Select a Room</mat-label>
     <mat-select formControlName="rooms">
-      <mat-option>None</mat-option>
-      <mat-option value="option1">Option 1</mat-option>
-      <mat-option value="option2">Option 2</mat-option>
-      <mat-option value="option3">Option 3</mat-option>
+      <mat-option>
+        None
+      </mat-option>
+      <ng-container *ngIf="(roomsList$ | async) as roomsList">
+        <mat-optgroup *ngFor="let roomGroup of roomsList" [label]="roomGroup.level">
+          <ng-container *ngFor="let room of roomGroup.rooms">
+            <mat-option *ngIf="!room.occupied" [value]="room">
+              {{room.roomNo}}
+            </mat-option>
+          </ng-container>
+        </mat-optgroup>
+      </ng-container>
     </mat-select>
   </mat-form-field>
 </form>

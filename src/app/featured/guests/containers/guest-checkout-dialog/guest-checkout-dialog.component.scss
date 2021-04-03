@@ -1,0 +1,15 @@
+.title {
+  text-align: center;
+  width: 100%;
+  margin: 0;
+}
+.booking-form-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > * {
+    &:not(:last-child) {
+      margin-right: 16px;
+    }
+  }
+}
