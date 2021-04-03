@@ -1,0 +1,7 @@
+[build]
+  publish = "dist/booking-web"
+  command = "yarn build"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
