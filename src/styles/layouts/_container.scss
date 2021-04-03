@@ -1,7 +1,7 @@
-.container-guest-list {
+.container-guest-list, .container-booking, .container-guest-detail {
   display: grid;
   grid-template-columns: 1fr repeat(8, minmax(min-content, 142px)) 1fr;
-  grid-template-rows: repeat(3, min-content);
+  grid-template-rows: 96px repeat(3, min-content) 48px;
 
   & > * {
     padding: 16px 24px;
@@ -9,16 +9,16 @@
 
   &-title {
     grid-column: 2 / 10;
-    grid-row: 1 / 2;
-  }
-
-  &-table-heading {
-    grid-column: 2 / 10;
     grid-row: 2 / 3;
   }
 
-  &-table {
+  &-content-heading {
     grid-column: 2 / 10;
-    grid-row: 3 / -1;
+    grid-row: 3 / 4;
+  }
+
+  &-content {
+    grid-column: 2 / 10;
+    grid-row: 4 / 5;
   }
 }

@@ -1,0 +1,38 @@
+<div class="container-booking">
+  <h1 class="container-booking-title mat-title">Booking Web App</h1>
+  <div class="container-booking-content-heading">
+    <button mat-mini-fab color="primary" type="button" [routerLink]="['/guests']">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="mat-h3">Booking Form</h1>
+  </div>
+  <div class="container-booking-content">
+    <mat-card>
+      <mat-card-content>
+        <div class="form-cols">
+          <div>
+            <h1 class="mat-h2">Add Guest</h1>
+            <div class="guest-section">
+              <mat-radio-group>
+                <mat-radio-button disableRipple value="manual">Add Manually</mat-radio-button>
+                <mat-radio-button disableRipple value="auto">Add From Existing Guests</mat-radio-button>
+              </mat-radio-group>
+              <app-guest-select-form></app-guest-select-form>
+              <app-guest-add-form></app-guest-add-form>
+            </div>
+          </div>
+          <div>
+            <h1 class="mat-h2">Booking Info</h1>
+            <div class="guest-section">
+              <app-booking-form></app-booking-form>
+            </div>
+          </div>
+        </div>
+        <div class="booking-form-buttons">
+          <button type="button" mat-raised-button color="warn" [routerLink]="['/guests']">Cancel</button>
+          <button type="button" mat-raised-button color="primary">Save</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
